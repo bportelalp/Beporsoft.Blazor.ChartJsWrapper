@@ -1,4 +1,4 @@
-namespace Beporsoft.Blazor.ChartJsWrapper.Tests
+namespace Beporsoft.Blazor.Charts.Tests
 {
     public class UnitTest1
     {
