@@ -12,7 +12,7 @@ namespace Beporsoft.Blazor.Charts.TestingGroundWasm.Client
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+            builder.Services.AddScoped<ChartJsInterop>();
             await builder.Build().RunAsync();
         }
     }
