@@ -1,5 +1,7 @@
 ﻿using Beporsoft.Blazor.Charts.Interop;
+using Beporsoft.Blazor.Charts.Serialization;
 using Microsoft.JSInterop;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +27,11 @@ namespace Beporsoft.Blazor.Charts
         public async Task RenderChart(Chart chart)
         {
             var module = await GetModule();
+            List<object> labels = chart.Labels.GetLabels();
 
-            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId);
+            List<DatasetSerializable> datasets = chart.Datasets.Select(d => new DatasetSerializable(d)).ToList();
+            
+            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, labels, datasets);
 
         }
 

@@ -9,10 +9,11 @@ namespace Beporsoft.Blazor.Charts.Datasets
     public interface IChartDataset
     {
         /// <summary>
-        /// The label for the dataset which appears in the legend and tooltips.
-        /// 
+        /// The title for the dataset which appears in the legend and tooltips.
         /// </summary>
-        public string Label { get; set; }
+        public string Title { get; set; }
+
+        internal List<object?> GetData();
 
     }
 
