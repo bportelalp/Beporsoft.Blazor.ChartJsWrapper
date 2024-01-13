@@ -19,7 +19,7 @@ namespace Beporsoft.Blazor.Charts
         #region Parameters
         public string ChartId {get; } = Guid.NewGuid().ToString();
 
-        public IMainAxisDataset Labels { get; set; }
+        public IMainAxisDataset? Labels { get; set; }
 
         public IList<IChartDataset> Datasets { get; set; } = new List<IChartDataset>();
         #endregion
@@ -31,10 +31,6 @@ namespace Beporsoft.Blazor.Charts
         
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            Labels = new NumberAxisDataset<int>() { 1, 2, 3, 4, 5, 6 };
-            var dataset = new BarDataset<int>();
-            dataset.Data = new List<int>() { 4, 6, 1, 9, 7 };
-            Datasets.Add(dataset);
             if (firstRender)
             {
                await ChartInterop.RenderChart(this);

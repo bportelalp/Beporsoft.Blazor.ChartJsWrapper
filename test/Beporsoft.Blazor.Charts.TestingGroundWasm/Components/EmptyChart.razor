@@ -1,1 +1,22 @@
-﻿<Chart />
+﻿<h3> Vacio</h3>
+
+<h2>BarChart</h2>
+<Chart @ref="_chart" />
+
+
+@code {
+    private Chart _chart = new();
+
+    protected override void OnInitialized()
+    {
+        var labels = RandomDataGen.GetNumberSeries(1, 10);
+        var data1 = RandomDataGen.GetDoubleSamples(-10, 10, 10);
+
+        _chart.Labels = new NumberAxisDataset<int>(labels);
+
+        _chart.Datasets.Add(new BarDataset<double>(data1));
+        base.OnInitialized();
+    }
+
+}
+ 
