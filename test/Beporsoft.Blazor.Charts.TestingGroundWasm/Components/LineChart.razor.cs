@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Beporsoft.Blazor.Charts.TestingGroundWasm.Components
 {
-    public partial class EmptyChart : ComponentBase
+    public partial class LineChart : ComponentBase
     {
 
     }

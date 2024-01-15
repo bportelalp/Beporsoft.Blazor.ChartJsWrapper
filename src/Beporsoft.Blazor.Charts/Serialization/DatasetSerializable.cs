@@ -1,4 +1,4 @@
-﻿using Beporsoft.Blazor.Charts.Datasets;
+﻿using Beporsoft.Blazor.Charts.Common;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

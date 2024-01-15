@@ -1,4 +1,4 @@
-﻿using Beporsoft.Blazor.Charts.Datasets;
+﻿using Beporsoft.Blazor.Charts.Common;
 using Beporsoft.Blazor.Charts.Interop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
@@ -19,9 +19,8 @@ namespace Beporsoft.Blazor.Charts
         #region Parameters
         public string ChartId {get; } = Guid.NewGuid().ToString();
 
-        public IMainAxisDataset? Labels { get; set; }
+        public ConfigBase? Config { get; set; }
 
-        public IList<IChartDataset> Datasets { get; set; } = new List<IChartDataset>();
         #endregion
 
         #region Privates

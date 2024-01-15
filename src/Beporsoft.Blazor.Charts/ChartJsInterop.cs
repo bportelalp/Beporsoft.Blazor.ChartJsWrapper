@@ -27,9 +27,9 @@ namespace Beporsoft.Blazor.Charts
         public async Task RenderChart(Chart chart)
         {
             var module = await GetModule();
-            List<object> labels = chart.Labels.GetLabels();
+            List<object> labels = chart.Config.Data.Labels.GetLabels();
 
-            List<DatasetSerializable> datasets = chart.Datasets.Select(d => new DatasetSerializable(d)).ToList();
+            List<DatasetSerializable> datasets = chart.Config.Data.Datasets.Select(d => new DatasetSerializable(d)).ToList();
             
             await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, labels, datasets);
 

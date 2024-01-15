@@ -1,4 +1,4 @@
-﻿using Beporsoft.Blazor.Charts.Options;
+﻿using Beporsoft.Blazor.Charts.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

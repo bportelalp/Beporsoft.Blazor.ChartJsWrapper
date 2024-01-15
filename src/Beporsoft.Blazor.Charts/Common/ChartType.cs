@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Beporsoft.Blazor.Charts.Options
+namespace Beporsoft.Blazor.Charts.Common
 {
     public enum ChartType
     {
