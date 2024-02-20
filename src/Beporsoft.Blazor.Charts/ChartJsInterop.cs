@@ -2,6 +2,7 @@
 using Beporsoft.Blazor.Charts.Serialization;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,21 @@ namespace Beporsoft.Blazor.Charts
             _js = js;
         }
 
-
+        private static JsonSerializerSettings JsonSettings { get; } = new JsonSerializerSettings
+        {
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            },
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         public async Task RenderChart(Chart chart)
         {
-            var module = await GetModule();
-            List<object> labels = chart.Config.Data.Labels.GetLabels();
 
-            List<DatasetSerializable> datasets = chart.Config.Data.Datasets.Select(d => new DatasetSerializable(d)).ToList();
-            
-            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, labels, datasets);
+            var module = await GetModule();
+            var config = JsonConvert.SerializeObject(chart.Config, JsonSettings);
+            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, config);
 
         }
 

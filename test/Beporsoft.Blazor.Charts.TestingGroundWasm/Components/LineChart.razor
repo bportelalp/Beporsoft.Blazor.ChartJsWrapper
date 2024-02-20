@@ -15,7 +15,7 @@
             var data1 = RandomDataGen.GetDoubleSamples(-10, 10, 10);
 
             _chart.Config = new();
-            
+            _chart.Config.Options.Title = new("Titulo");
             _chart.Config.Data.Labels = new NumberLabelList<int>(labels);
 
             _chart.Config.Data.Datasets.Add(new BarDataset<double>(data1));
