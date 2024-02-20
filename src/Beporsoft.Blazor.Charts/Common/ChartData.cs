@@ -9,8 +9,8 @@ namespace Beporsoft.Blazor.Charts.Common
     public class ChartData
     {
 
-        public IAxisLabels Labels { get; set; }
+        public ILabelList Labels { get; set; }
 
-        public IList<IChartDataset> Datasets { get; set; }
+        public IList<IChartDataset> Datasets { get; set; } = new List<IChartDataset>();
     }
 }

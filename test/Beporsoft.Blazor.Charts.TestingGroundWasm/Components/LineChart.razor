@@ -9,12 +9,18 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        var labels = RandomDataGen.GetNumberSeries(1, 10);
-        var data1 = RandomDataGen.GetDoubleSamples(-10, 10, 10);
+        if (firstRender)
+        {
+            var labels = RandomDataGen.GetNumberSeries(1, 10);
+            var data1 = RandomDataGen.GetDoubleSamples(-10, 10, 10);
 
-        _chart.Labels = new NumberAxisDataset<int>(labels);
+            _chart.Config = new();
+            
+            _chart.Config.Data.Labels = new NumberLabelList<int>(labels);
 
-        _chart.Datasets.Add(new BarDataset<double>(data1));
+            _chart.Config.Data.Datasets.Add(new BarDataset<double>(data1));
+            
+        }
     }
 
 }

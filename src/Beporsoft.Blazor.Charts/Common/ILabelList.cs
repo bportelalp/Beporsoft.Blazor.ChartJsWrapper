@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Common
 {
-    public interface IAxisLabels
+    public interface ILabelList
     {
         internal List<object> GetLabels();
     }
