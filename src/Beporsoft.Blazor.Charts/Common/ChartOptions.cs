@@ -11,6 +11,8 @@ namespace Beporsoft.Blazor.Charts.Common
     {
         public bool Responsive { get; set; } = true;
 
+        internal bool MaintainAspectRatio { get; } = false;
+
         [JsonIgnore]
         public Legend? Legend { get; set; }
 

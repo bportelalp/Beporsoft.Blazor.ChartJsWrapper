@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\Charts\BarCharts\BarChart.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Beporsoft.Blazor.Charts.SampleData\Beporsoft.Blazor.Charts.SampleData.csproj" />
+    <ProjectReference Include="..\..\src\Beporsoft.Blazor.Charts\Beporsoft.Blazor.Charts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Charts\BarCharts\BarChart.razor" />
+  </ItemGroup>
+
+</Project>

@@ -10,13 +10,19 @@ namespace Beporsoft.Blazor.Charts.Datasets
     public class BarDataset<T> : ChartDataset<T>
     {
 
+        public BarDataset()
+        {
+            Type = ChartType.Bar;
+        }
+
         public BarDataset(IEnumerable<T> data) : this()
         {
             base.Data = data.ToList();
         }
-        public BarDataset()
+
+        public BarDataset(string title, IEnumerable<T> data) : this(data)
         {
-            Type = ChartType.Bar;
+            Title = title;
         }
     }
 }
