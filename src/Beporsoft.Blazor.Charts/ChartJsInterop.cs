@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -30,14 +31,18 @@ namespace Beporsoft.Blazor.Charts
                 NamingStrategy = new CamelCaseNamingStrategy()
             },
             NullValueHandling = NullValueHandling.Ignore
+            
         };
 
         public async Task RenderChart(Chart chart)
         {
 
             var module = await GetModule();
-            var config = JsonConvert.SerializeObject(chart.Config, JsonSettings);
-            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, config);
+
+            dynamic cfg = chart.Config.ToChartJsObject();
+            
+            //var config = JsonConvert.SerializeObject(chart.Config, JsonSettings);
+            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, (object)cfg);
 
         }
 

@@ -15,5 +15,6 @@ namespace Beporsoft.Blazor.Charts.Common
         }
         
         public static ChartType Bar { get; } = new ChartType("bar");
+        public static ChartType Line { get; } = new ChartType("line");
     }
 }

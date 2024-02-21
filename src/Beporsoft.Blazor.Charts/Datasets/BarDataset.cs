@@ -22,7 +22,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public BarDataset(string title, IEnumerable<T> data) : this(data)
         {
-            Title = title;
+            Label = title;
         }
     }
 }

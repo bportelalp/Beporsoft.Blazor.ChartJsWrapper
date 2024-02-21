@@ -15,9 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CD7750D7-F71
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{FF94650C-2B74-4DFB-82C8-F4B08F151E66}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beporsoft.Blazor.Charts.TestingGroundWasm", "test\Beporsoft.Blazor.Charts.TestingGroundWasm\Beporsoft.Blazor.Charts.TestingGroundWasm.csproj", "{A03F633A-600A-48DF-A6BD-D1D05D551E06}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beporsoft.Blazor.Charts.TestServer", "test\Beporsoft.Blazor.Charts.TestServer\Beporsoft.Blazor.Charts.TestServer.csproj", "{A4C4781D-C217-4313-A17E-7B090F4E9A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beporsoft.Blazor.Charts.TestServer", "test\Beporsoft.Blazor.Charts.TestServer\Beporsoft.Blazor.Charts.TestServer.csproj", "{A4C4781D-C217-4313-A17E-7B090F4E9A4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{F3C0CA79-5906-4BE4-BCED-C7A6C01919E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3C0CA79-5906-4BE4-BCED-C7A6C01919E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3C0CA79-5906-4BE4-BCED-C7A6C01919E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A03F633A-600A-48DF-A6BD-D1D05D551E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A03F633A-600A-48DF-A6BD-D1D05D551E06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A03F633A-600A-48DF-A6BD-D1D05D551E06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A03F633A-600A-48DF-A6BD-D1D05D551E06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4C4781D-C217-4313-A17E-7B090F4E9A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4C4781D-C217-4313-A17E-7B090F4E9A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4C4781D-C217-4313-A17E-7B090F4E9A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,7 +47,6 @@ Global
 		{2CA6CACE-3C0D-4C12-AE16-582CE41D7B9B} = {CD7750D7-F717-4339-8E9C-690369FB67C5}
 		{86B6A0AD-A7CB-442A-A916-C4865764EB43} = {9363966C-D55E-4DE1-B1DD-FADAAADEBDC5}
 		{F3C0CA79-5906-4BE4-BCED-C7A6C01919E8} = {CD7750D7-F717-4339-8E9C-690369FB67C5}
-		{A03F633A-600A-48DF-A6BD-D1D05D551E06} = {9363966C-D55E-4DE1-B1DD-FADAAADEBDC5}
 		{A4C4781D-C217-4313-A17E-7B090F4E9A4F} = {9363966C-D55E-4DE1-B1DD-FADAAADEBDC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

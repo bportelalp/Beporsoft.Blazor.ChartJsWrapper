@@ -1,0 +1,32 @@
+﻿@page "/line-chart"
+@page "/line-chart/{ChartType}"
+
+
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <NavLink class="nav-link" href="line-chart/linear" Match="NavLinkMatch.All">Linear</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="line-chart/log">Logarithmic</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="line-chart/time">Time</NavLink>
+    </li>
+</ul>
+
+@switch (ChartType)
+{
+    case "linear":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />
+        break;
+    case "log":
+        break;
+    default:
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />
+        break;
+}
+
+@code {
+    [Parameter] public string? ChartType { get; set; } = default!;
+}

@@ -1,0 +1,38 @@
+﻿@using System.Drawing
+<Chart @ref="_chart" />
+
+
+@code {
+    private Chart? _chart;
+
+
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var labels = RandomDataGen.GetNumberSeries(1, 10);
+            var data1 = RandomDataGen.GetDoubleSamples(-10, 10, 10);
+            var data2 = RandomDataGen.GetDoubleSamples(0, 10, 10);
+            if (_chart is null)
+
+                return;
+            _chart.Config = new();
+            _chart.Config.Options.Title = new("Titulo");
+            _chart.Config.Data.Labels = new NumberLabelList<int>(labels);
+
+            var dataset1 = new LineDataset<double>("DatosBarras", data1);
+            dataset1.SetLineColor(Color.DarkGreen)
+            .SetPointStyle(Common.PointStyle.RectRounded, 6);
+
+
+            _chart.Config.Data.Datasets.Add(dataset1);
+            _chart.Config.Data.Datasets.Add(new LineDataset<double>("DatosBarras2", data2));
+
+            
+
+        }
+    }
+
+}
