@@ -39,7 +39,7 @@ namespace Beporsoft.Blazor.Charts
 
             var module = await GetModule();
 
-            dynamic cfg = chart.Config.ToChartJsObject();
+            dynamic cfg = chart.Config.ToChartObject();
             
             //var config = JsonConvert.SerializeObject(chart.Config, JsonSettings);
             await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, (object)cfg);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Beporsoft.Blazor.Charts.Configuration;
 
 namespace Beporsoft.Blazor.Charts.Common
 {
@@ -15,15 +16,20 @@ namespace Beporsoft.Blazor.Charts.Common
 
         public ChartData Data { get; set; } = new();
 
-        public ChartOptions Options { get; set; } = new();
+        public bool Responsive { get; set; } = true;
 
-        public virtual object ToChartJsObject()
+        internal bool MaintainAspectRatio { get; } = true;
+        public Options Options { get; set; } = new();
+
+        public virtual object ToChartObject()
         {
             dynamic obj = new ExpandoObject();
             obj.type = Type.Value;
-            obj.data= Data.ToChartJsObject();
-            obj.plugins = new ExpandoObject();
-            obj.plugins.options = Options;
+            obj.data= Data.ToChartObject();
+            obj.options = new ExpandoObject();
+            obj.options.plugins = Options.ToChartObject();
+            obj.options.responsive = Responsive;
+            obj.options.maintainAspectRatio = MaintainAspectRatio;
             return obj;
         }
     }

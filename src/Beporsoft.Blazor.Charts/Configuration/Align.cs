@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Beporsoft.Blazor.Charts.Common;
 
-namespace Beporsoft.Blazor.Charts.Common
+namespace Beporsoft.Blazor.Charts.Configuration
 {
     public class Align : StringEnumClass
     {
-        private Align(string value): base(value) { }
+        private Align(string value) : base(value) { }
 
         public static Align Start { get; } = new Align("start");
         public static Align Center { get; } = new Align("center");

@@ -17,7 +17,10 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public BarDataset(IEnumerable<T> data) : this()
         {
-            base.Data = data.ToList();
+            foreach (var item in data)
+            {
+                Add(item);
+            }
         }
 
         public BarDataset(string title, IEnumerable<T> data) : this(data)

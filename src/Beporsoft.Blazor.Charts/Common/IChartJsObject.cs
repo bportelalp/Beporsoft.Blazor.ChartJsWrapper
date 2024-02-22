@@ -8,6 +8,10 @@ namespace Beporsoft.Blazor.Charts.Common
 {
     public interface IChartJsObject
     {
-        public object ToChartJsObject();
+        /// <summary>
+        /// Converts the instance into the equivalent structure of well-known Chart.Js objects.
+        /// </summary>
+        /// <returns></returns>
+        public object ToChartObject();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Beporsoft.Blazor.Charts.Common;
+using Beporsoft.Blazor.Charts.Configuration;
 using Beporsoft.Blazor.Charts.Serialization;
 using Newtonsoft.Json;
 using System;
@@ -19,7 +20,10 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public LineDataset(IEnumerable<T> data) : this()
         {
-            base.Data = data.ToList();
+            foreach (var item in data)
+            {
+                Add(item);
+            }
         }
 
         public LineDataset(string title, IEnumerable<T> data) : this(data)
@@ -37,20 +41,14 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public double? Tension { get; set; }
 
-        /// <summary>
-        /// Style of the point.
-        /// </summary>
-        public PointStyle? PointStyle { get; set; }
+        public PointOptions PointOptions { get; set; } = new();
 
-        /// <summary>
-        /// The radius of the point shape, or 0 for not render.
-        /// </summary>
-        public int? PointRadius { get; set; }
-
-        /// <summary>
-        /// The radius of the point shape when the mouse interacts with it.
-        /// </summary>
-        internal int? PointHitRadius { get; set; }
+        #region Fluent methods
+        public LineDataset<T> SetStepped()
+        {
+            Stepped = true;
+            return this;
+        }
 
         public LineDataset<T> SetLineColor(Color lineColor)
         {
@@ -61,19 +59,27 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public LineDataset<T> SetPointStyle(PointStyle style, int radius)
         {
-            PointStyle = style;
-            PointRadius = radius;
-            PointHitRadius = radius + 10;
+            PointOptions.PointStyle = style;
+            PointOptions.Radius = radius;
+            PointOptions.HoverRadius = radius + 3;
             return this;
         }
+        #endregion
 
-        
+
 
         protected override dynamic BuildJsObject()
         {
             dynamic obj = base.BuildJsObject();
             if (BorderColor is not null)
                 obj.borderColor = ColorTranslator.ToHtml(BorderColor.Value);
+            if (BackgroundColor is not null)
+                obj.backgroundColor = ColorTranslator.ToHtml(BackgroundColor.Value);
+            if (Stepped is not null) 
+                obj.stepped = Stepped;
+
+
+            PointOptions?.AppendLineDatasetProperties(obj);
 
             return obj;
         }
