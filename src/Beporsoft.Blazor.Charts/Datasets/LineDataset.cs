@@ -43,6 +43,8 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public PointOptions PointOptions { get; set; } = new();
 
+        public string? VerticalAxisId { get; set; }
+
         #region Fluent methods
         public LineDataset<T> SetStepped()
         {
@@ -64,6 +66,12 @@ namespace Beporsoft.Blazor.Charts.Datasets
             PointOptions.HoverRadius = radius + 3;
             return this;
         }
+
+        public LineDataset<T> SetVerticalAxis(string id)
+        {
+            VerticalAxisId = id;
+            return this;
+        }
         #endregion
 
 
@@ -75,9 +83,11 @@ namespace Beporsoft.Blazor.Charts.Datasets
                 obj.borderColor = ColorTranslator.ToHtml(BorderColor.Value);
             if (BackgroundColor is not null)
                 obj.backgroundColor = ColorTranslator.ToHtml(BackgroundColor.Value);
-            if (Stepped is not null) 
+            if (Stepped is not null)
                 obj.stepped = Stepped;
 
+            if (VerticalAxisId is not null)
+                obj.yAxisID = VerticalAxisId;
 
             PointOptions?.AppendLineDatasetProperties(obj);
 

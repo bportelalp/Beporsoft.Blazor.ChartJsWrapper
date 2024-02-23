@@ -17,9 +17,16 @@ namespace Beporsoft.Blazor.Charts
         #endregion
 
         #region Parameters
+        [Parameter] public ChartData? Data { get; set; } = default!;
+        [Parameter] public ConfigBase? Config { get; set; } = default!;
+
+        /// <summary>
+        /// Allow to render the chart inmediately after the first render.
+        /// </summary>
+        [Parameter] public bool AllowFirstRender { get; set; } = true;
+
         public string ChartId {get; } = Guid.NewGuid().ToString();
 
-        public ConfigBase? Config { get; set; }
 
         #endregion
 
@@ -32,7 +39,8 @@ namespace Beporsoft.Blazor.Charts
         {
             if (firstRender)
             {
-               await ChartInterop.RenderChart(this);
+                if(AllowFirstRender)
+                    await ChartInterop.RenderChart(this);
             }
         }
         #endregion

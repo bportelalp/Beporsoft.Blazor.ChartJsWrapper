@@ -17,6 +17,7 @@ namespace Beporsoft.Blazor.Charts.Configuration
 
         public TitleOptions? Subtitle { get; set; }
 
+
         #region Fluent methods
         public TitleOptions AddTitle(string text)
         {

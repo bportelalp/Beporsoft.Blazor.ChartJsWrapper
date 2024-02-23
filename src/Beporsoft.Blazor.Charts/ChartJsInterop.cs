@@ -1,5 +1,6 @@
 ﻿using Beporsoft.Blazor.Charts.Interop;
 using Beporsoft.Blazor.Charts.Serialization;
+using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -17,11 +18,13 @@ namespace Beporsoft.Blazor.Charts
     public class ChartJsInterop
     {
         private readonly IJSRuntime _js;
+        private readonly ILogger<ChartJsInterop>? _logger;
         private IJSObjectReference? _module;
 
-        public ChartJsInterop(IJSRuntime js)
+        public ChartJsInterop(IJSRuntime js, ILogger<ChartJsInterop>? logger)
         {
             _js = js;
+            _logger = logger;
         }
 
         private static JsonSerializerSettings JsonSettings { get; } = new JsonSerializerSettings
@@ -31,7 +34,7 @@ namespace Beporsoft.Blazor.Charts
                 NamingStrategy = new CamelCaseNamingStrategy()
             },
             NullValueHandling = NullValueHandling.Ignore
-            
+
         };
 
         public async Task RenderChart(Chart chart)
@@ -39,9 +42,16 @@ namespace Beporsoft.Blazor.Charts
 
             var module = await GetModule();
 
+            if (chart.Config is null)
+                throw ChartExceptionFactory.CreateMissingConfiguration(chart.ChartId);
+
             dynamic cfg = chart.Config.ToChartObject();
-            
-            //var config = JsonConvert.SerializeObject(chart.Config, JsonSettings);
+
+            if (chart.Data is null)
+                _logger?.LogWarning("Chart {chartId} rendered without data", chart.ChartId);
+            else
+                cfg.data = chart.Data.ToChartObject();
+
             await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, (object)cfg);
 
         }
