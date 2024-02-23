@@ -67,6 +67,12 @@ namespace Beporsoft.Blazor.Charts.Datasets
             return this;
         }
 
+        /// <summary>
+        /// Provides the Id of the vertical axis which will be used with this dataset. It is
+        /// usefull only when multiple y axis are configured. Defaults to 'y'.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public LineDataset<T> SetVerticalAxis(string id)
         {
             VerticalAxisId = id;

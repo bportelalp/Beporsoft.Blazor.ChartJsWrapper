@@ -29,11 +29,13 @@ namespace Beporsoft.Blazor.Charts.Common
         public Dictionary<string,Axis>? Axes { get; set; }
 
         #region Fluent methods
-        public CartesianAxis AddCartesianAxis(string axisId)
+        public CartesianAxis AddLinearAxis(string axisId) => AddCartesianAxis(axisId, ScaleType.Linear);
+        public CartesianAxis AddLogarithmicAxis(string axisId) => AddCartesianAxis(axisId, ScaleType.Logarithmic);
+        public CartesianAxis AddCartesianAxis(string axisId, ScaleType scaleType)
         {
             Axes ??= new Dictionary<string,Axis>();
 
-            CartesianAxis axis = new(axisId);
+            CartesianAxis axis = new(axisId, scaleType);
             Axes.Add(axisId, axis);
             return axis;
         }

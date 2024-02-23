@@ -1,0 +1,63 @@
+﻿@using Beporsoft.Blazor.Charts.Common
+@using Beporsoft.Blazor.Charts.Configuration
+@using System.Drawing
+<Chart @ref="_chart" Config="_config" Data="_data" />
+
+
+@code {
+    private Chart? _chart;
+
+    private ConfigBase _config = new();
+    private ChartData _data = new();
+
+
+    protected override void OnInitialized()
+    {
+        _config = new ConfigBase();
+        _config.Options
+            .AddTitle("Logarithmic scale chart")
+            .WithLocation(Position.Top, Align.Center)
+            .WithFont(16);
+
+        _config.AddLinearAxis("x")
+            .AddTitle("X axis");
+
+        _config.AddLinearAxis("y")
+            .AddTitle("Y axis linear");
+
+        _config.AddLogarithmicAxis("ylog")
+            .SetPosition(Position.Right)
+            .AddTitle("Y axis logarithmic");
+
+
+        _config.Options
+            .AddSubtitle($"This is a line chart where a high range dataset is represented on a linear axis and on logarithmic axis")
+            .WithFont(12);
+
+        base.OnInitialized();
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+
+        return base.OnParametersSetAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            var data = RandomDataGen.GetDoubleLinearSamples(1500, 150000, 50);
+            var datasetLinear = new LineDataset<double>("Linear", data);
+            datasetLinear.SetVerticalAxis("y");
+
+            var datasetLog = new LineDataset<double>("logarithmic", data);
+            datasetLog.SetVerticalAxis("ylog");
+
+            _data.Labels = RandomDataGen.GetNumberSeries(0, 51).ToList();
+            _data.Datasets.Add(datasetLinear);
+            _data.Datasets.Add(datasetLog);
+        }
+    }
+}
