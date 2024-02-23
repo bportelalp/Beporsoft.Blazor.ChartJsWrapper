@@ -7,11 +7,8 @@ using Beporsoft.Blazor.Charts.Common;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public class DateTimeLabelList : List<DateTime>, ILabelList
+    public class DateTimeLabelList : List<DateTime>
     {
-        List<object> ILabelList.GetLabels()
-        {
-            return this.Select(i => (object)i).ToList();
-        }
+
     }
 }

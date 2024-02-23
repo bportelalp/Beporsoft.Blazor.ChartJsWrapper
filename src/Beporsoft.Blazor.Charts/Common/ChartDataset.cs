@@ -1,24 +1,37 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Common
 {
-    public class ChartDataset<T> : IChartDataset<T>
+    /// <summary>
+    /// Represent the base class for chart dataset of type <typeparamref name="T"/>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class ChartDataset<T> : Collection<T>, IChartDataset<T>
     {
         public ChartType? Type { get; set; }
 
-        public string Title { get; set; } = string.Empty;
+        public string Label { get; set; } = string.Empty;
 
-        public ICollection<T> Data { get; set; } = new List<T>();
+        public ICollection<T> Data => Items;
 
-
-        List<object?> IChartDataset.GetData()
+        protected virtual dynamic BuildJsObject()
         {
-            return Data.Select(i => (object?)i).ToList();
+            dynamic obj = new ExpandoObject();
+            obj.label = Label;
+            obj.type = Type?.Value;
+            obj.data = Items;
+            
+            return obj;
         }
+
+        dynamic IChartJsObject.ToChartObject() => BuildJsObject();
     }
 }

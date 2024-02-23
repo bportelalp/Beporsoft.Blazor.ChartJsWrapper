@@ -35,5 +35,17 @@
             }
         }
 
+        public static IEnumerable<double> GetDoubleLinearSamples(double min, double max, int amount)
+        {
+            double slope = (max - min) / amount;
+
+            double fx(double x) => slope * x + min;
+
+            for(int i = 0; i <= amount; i++)
+            {
+                yield return fx(i);
+            }
+        }
+
     }
 }
