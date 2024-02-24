@@ -1,0 +1,36 @@
+﻿@page "/bar-chart"
+@page "/bar-chart/{ChartType}"
+
+
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <NavLink class="nav-link" href="bar-chart/vertical" Match="NavLinkMatch.All">Vertical</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="bar-chart/horizontal">Horizontal</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="bar-chart/stacked">Stacked</NavLink>
+    </li>
+</ul>
+
+@switch (ChartType)
+{
+    case "vertical":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BarCharts.VerticalBarChart />
+        break;
+    case "horizontal":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BarCharts.HorizontalBarChart />
+        break;
+    case "stacked":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BarCharts.StackedBarChart />
+        break;
+    default:
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BarCharts.VerticalBarChart />
+        break;
+}
+
+@code {
+    [Parameter] public string? ChartType { get; set; } = default!;
+}

@@ -31,8 +31,14 @@ namespace Beporsoft.Blazor.Charts.Datasets
             Label = title;
         }
 
+        /// <summary>
+        /// The color applied to the line and the border of points.
+        /// </summary>
         public Color? BorderColor { get; set; }
 
+        /// <summary>
+        /// The color applied to the fill of points.
+        /// </summary>
         public Color? BackgroundColor { get; set; }
 
         public int? BorderWidth { get; set; }
@@ -43,7 +49,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public PointOptions PointOptions { get; set; } = new();
 
-        public string? VerticalAxisId { get; set; }
+
 
         #region Fluent methods
         public LineDataset<T> SetStepped()
@@ -75,7 +81,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
         /// <returns></returns>
         public LineDataset<T> SetVerticalAxis(string id)
         {
-            VerticalAxisId = id;
+            OrdinateAxisId = id;
             return this;
         }
         #endregion
@@ -91,9 +97,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
                 obj.backgroundColor = ColorTranslator.ToHtml(BackgroundColor.Value);
             if (Stepped is not null)
                 obj.stepped = Stepped;
-
-            if (VerticalAxisId is not null)
-                obj.yAxisID = VerticalAxisId;
 
             PointOptions?.AppendLineDatasetProperties(obj);
 

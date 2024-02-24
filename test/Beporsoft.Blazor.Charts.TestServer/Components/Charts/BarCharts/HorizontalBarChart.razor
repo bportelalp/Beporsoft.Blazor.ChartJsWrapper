@@ -1,0 +1,65 @@
+﻿@using Beporsoft.Blazor.Charts.Common
+@using Beporsoft.Blazor.Charts.Configuration
+@using System.Drawing
+<Chart @ref="_chart" Config="_config" Data="_data" />
+
+
+@code {
+    private Chart? _chart;
+
+    private ConfigBase _config = new();
+    private ChartData _data = new();
+
+
+    protected override void OnInitialized()
+    {
+        _config = new ConfigBase();
+        _config.MainAxis = "y";
+        _config.Options
+            .AddTitle("Bar chart")
+            .WithLocation(Position.Top, Align.Center)
+            .WithFont(16);
+
+        _config.AddLinearAxis("x")
+            .AddTitle("X axis");
+        _config.AddLinearAxis("y")
+            .AddTitle("Y axis");
+
+
+        _config.Options
+            .AddSubtitle($"A bar chart with horizontal bars")
+            .WithFont(12);
+
+        base.OnInitialized();
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            var dataset1 = BuildContinuousDataset();
+
+            _data.Labels = RandomDataGen.GetNumberSeries(1, 50).ToList();
+            _data.Datasets.Add(dataset1);
+        }
+    }
+
+    private IChartDataset BuildContinuousDataset()
+    {
+        var data = RandomDataGen.GetDoubleSamples(0, 20, 10);
+        var dataset = new BarDataset<double>("Bar", data);
+        dataset.SetBarColor(Color.Aquamarine);
+
+        return dataset;
+    }
+
+
+
+
+}

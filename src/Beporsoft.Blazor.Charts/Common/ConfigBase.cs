@@ -22,6 +22,12 @@ namespace Beporsoft.Blazor.Charts.Common
 
         internal bool MaintainAspectRatio { get; } = true;
 
+        /// <summary>
+        /// The main axis used as abscisa axis, commonly x-axis. You can change this value for example to draw an horizontal
+        /// bar chart.
+        /// </summary>
+        public string? MainAxis { get; set; }
+
         public  CultureInfo?  Locale { get; set; }
 
         public Options Options { get; set; } = new();
@@ -45,25 +51,38 @@ namespace Beporsoft.Blazor.Charts.Common
         {
             dynamic obj = new ExpandoObject();
             obj.type = Type.Value;
-            obj.options = new ExpandoObject();
-            obj.options.plugins = Options.ToChartObject();
-            obj.options.responsive = Responsive;
-            obj.options.maintainAspectRatio = MaintainAspectRatio;
+            obj.options = BuildOptionsNode();
 
-            if(Axes?.Any() is true)
+            return obj;
+        }
+
+        private object BuildOptionsNode()
+        {
+            dynamic opt = new ExpandoObject();
+            opt.plugins = Options.ToChartObject();
+            opt.responsive = Responsive;
+            opt.maintainAspectRatio = MaintainAspectRatio;
+            AppendScales(ref opt);
+
+            if (Locale is not null)
+                opt.locale = Locale.Name;
+            if (MainAxis is not null)
+                opt.indexAxis = "y";
+
+            return opt;
+        }
+
+        private void AppendScales(ref dynamic options)
+        {
+            if (Axes?.Any() is true)
             {
                 var scales = new ExpandoObject() as IDictionary<string, object>;
-                foreach(var axis in Axes)
+                foreach (var axis in Axes)
                 {
                     scales[axis.Key] = axis.Value.ToChartObject();
                 }
-                obj.options.scales = scales;
+                options.scales = scales;
             }
-
-            if (Locale is not null)
-                obj.options.locale = Locale.Name;
-
-            return obj;
         }
     }
 }
