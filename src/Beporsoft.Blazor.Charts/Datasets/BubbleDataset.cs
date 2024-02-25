@@ -17,7 +17,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
     public class BubbleDataset<Tx, Ty, Tz> : CartesianDataset<BubblePoint<Tx, Ty, Tz>>
     {
         #region Constructors
-        public BubbleDataset() : base(CartesianChartType.Line)
+        public BubbleDataset() : base(CartesianChartType.Bubble)
         {
         }
 

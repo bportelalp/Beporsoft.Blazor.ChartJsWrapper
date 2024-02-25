@@ -11,7 +11,7 @@
         <NavLink class="nav-link" href="line-chart/log">Logarithmic</NavLink>
     </li>
     <li class="nav-item">
-        <NavLink class="nav-link" href="line-chart/time">Time</NavLink>
+        <NavLink class="nav-link" href="line-chart/object-data">Object data</NavLink>
     </li>
 </ul>
 
@@ -22,6 +22,9 @@
         break;
     case "log":
         <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LogarithmicChart />
+        break;
+    case "object-data":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearObjectDataChart />
         break;
     default:
         <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />

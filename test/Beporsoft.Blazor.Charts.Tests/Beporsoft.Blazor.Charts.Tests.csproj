@@ -22,5 +22,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Beporsoft.Blazor.Charts\Beporsoft.Blazor.Charts.csproj" />
+  </ItemGroup>
 
 </Project>

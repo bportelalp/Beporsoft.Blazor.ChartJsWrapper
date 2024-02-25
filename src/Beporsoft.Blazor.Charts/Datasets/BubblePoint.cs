@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public class BubblePoint<Tx, Ty, Tz>
+    public class BubblePoint<Tx, Ty, Tz> : DataPoint<Tx, Ty>
     {
 
-        public BubblePoint(Tx x, Ty y, Tz z)
+        public BubblePoint(Tx x, Ty y, Tz z) : base(x, y)
         {
-            X = x;
-            Y = y;
             Z = z;
         }
 
@@ -21,18 +19,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
         {
             BubbleRadiusConverter = bubbleRadiusConverter;
         }
-
-
-
-        /// <summary>
-        /// The x coordinate.
-        /// </summary>
-        public Tx X { get; set; }
-
-        /// <summary>
-        /// The y coordinate.
-        /// </summary>
-        public Ty Y { get; set; }
 
         /// <summary>
         /// The z coordinate. The real bubble size is represented by <see cref="R"/>, which can have the same value or a converted value.
@@ -43,11 +29,11 @@ namespace Beporsoft.Blazor.Charts.Datasets
         /// <summary>
         /// The real bubble size, calculated from <see cref="Z"/> with the <see cref="BubbleRadiusConverter"/>
         /// </summary>
-        [JsonIgnore]
         public Tz R => BubbleRadiusConverter.Invoke(Z);
 
         /// <summary>
         /// The converter between <see cref="Z"/> and <see cref="R"/>. Default is <see cref="DefaultBubbleRadiusConverter"/>
+        [JsonIgnore]
         /// </summary>
         public Func<Tz, Tz> BubbleRadiusConverter { get; set; } = DefaultBubbleRadiusConverter;
 

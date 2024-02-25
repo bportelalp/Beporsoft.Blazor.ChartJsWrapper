@@ -1,0 +1,79 @@
+﻿@using Beporsoft.Blazor.Charts.Common
+@using Beporsoft.Blazor.Charts.Configuration
+@using System.Drawing
+<Chart @ref="_chart" Config="_config" Data="_data" />
+
+
+@code {
+    private Chart? _chart;
+
+    private ConfigBase _config = new();
+    private ChartData _data = new();
+
+
+    protected override void OnInitialized()
+    {
+        _config = new ConfigBase();
+        _config.Options
+            .AddTitle("Line chart with object-shape data")
+            .WithLocation(Position.Top, Align.Center)
+            .WithFont(16);
+
+        _config.AddLinearAxis("x")
+            .AddTitle("X axis");
+        _config.AddLinearAxis("y")
+            .AddTitle("Y axis");
+        _config.AddLinearAxis("y2")
+            .SetPosition(Position.Right)
+            .SetRange(0, null)
+            .AddTitle("High range axis")
+            .WithFont(14);
+
+
+        _config.Options
+            .AddSubtitle($"This is one line chart. The datasets are included with object data. No labels data are required")
+            .WithFont(12);
+
+        base.OnInitialized();
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+
+        return base.OnParametersSetAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            var dataset1 = BuildContinuousDataset("Object dataset",0, 30);
+            dataset1.SetLineColor(Color.FromArgb(100, 200, 100))
+                .SetPointStyle(PointStyle.Triangle, 6);
+
+            var dataset2 = BuildContinuousDataset("Object dataset large scale", 1400, 2000)
+                .SetVerticalAxis("y2");
+
+            _data.Labels = RandomDataGen.GetNumberSeries(1, 50).ToList();
+            _data.Datasets.Add(dataset1);
+            _data.Datasets.Add(dataset2);
+        }
+    }
+
+    private LineDataset<DataPoint<int, double>> BuildContinuousDataset(string title, int min, int max)
+    {
+        var x = RandomDataGen.GetNumberSeries(1, 50).ToList();
+        var y = RandomDataGen.GetDoubleSamples(min, max, 51).ToList();
+        var data = new List<DataPoint<int, double>>();
+        for(int i = 0; i < x.Count; i++)
+        {
+            data.Add(new DataPoint<int, double>(x[i], y[i]));
+        }
+        var dataset = new LineDataset<DataPoint<int, double>>(title, data);
+
+        return dataset;
+    }
+
+
+}

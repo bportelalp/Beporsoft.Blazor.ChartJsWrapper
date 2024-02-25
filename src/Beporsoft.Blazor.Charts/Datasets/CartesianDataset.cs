@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Beporsoft.Blazor.Charts.Cartesian
+namespace Beporsoft.Blazor.Charts.Datasets
 {
     /// <summary>
     /// Represent a dataset whose values can be represented in a cartesian system.
