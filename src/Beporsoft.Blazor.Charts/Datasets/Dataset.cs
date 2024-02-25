@@ -1,14 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using Beporsoft.Blazor.Charts.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Drawing;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Beporsoft.Blazor.Charts.Common
+namespace Beporsoft.Blazor.Charts.Datasets
 {
     /// <summary>
     /// Represent the base class for chart dataset of type <typeparamref name="T"/>
@@ -59,5 +61,16 @@ namespace Beporsoft.Blazor.Charts.Common
         }
 
         dynamic IChartJsObject.ToChartObject() => BuildJsObject();
+    }
+
+    public static class DatasetExtensions
+    {
+        public static void AddRange<TDataset, T>(this TDataset dataset, IEnumerable<T> values) where TDataset : Dataset<T>
+        {
+            foreach (var value in values)
+            {
+                dataset.Add(value);
+            }
+        }
     }
 }

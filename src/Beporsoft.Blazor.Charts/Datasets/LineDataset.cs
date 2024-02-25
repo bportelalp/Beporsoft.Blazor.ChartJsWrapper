@@ -1,5 +1,4 @@
-﻿using Beporsoft.Blazor.Charts.Cartesian;
-using Beporsoft.Blazor.Charts.Common;
+﻿using Beporsoft.Blazor.Charts.Common;
 using Beporsoft.Blazor.Charts.Configuration;
 using Beporsoft.Blazor.Charts.Serialization;
 using Newtonsoft.Json;
@@ -12,18 +11,21 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public sealed class LineDataset<T> : CartesianDataset<T>
+    public class LineDataset<T> : CartesianDataset<T>
     {
+
         public LineDataset() : base(CartesianChartType.Line)
         {
         }
 
+        protected LineDataset(CartesianChartType type) : base(type)
+        {
+
+        }
+
         public LineDataset(IEnumerable<T> data) : this()
         {
-            foreach (var item in data)
-            {
-                Add(item);
-            }
+            this.AddRange(data);
         }
 
         public LineDataset(string title, IEnumerable<T> data) : this(data)

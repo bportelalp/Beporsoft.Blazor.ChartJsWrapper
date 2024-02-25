@@ -1,5 +1,4 @@
-﻿using Beporsoft.Blazor.Charts.Cartesian;
-using Beporsoft.Blazor.Charts.Common;
+﻿using Beporsoft.Blazor.Charts.Common;
 using Beporsoft.Blazor.Charts.Configuration;
 using Beporsoft.Blazor.Charts.Helpers;
 using System;

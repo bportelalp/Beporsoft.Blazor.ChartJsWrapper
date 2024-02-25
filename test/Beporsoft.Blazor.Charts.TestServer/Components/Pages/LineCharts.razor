@@ -5,7 +5,7 @@
 
 <ul class="nav nav-pills">
     <li class="nav-item">
-        <NavLink class="nav-link" href="line-chart/linear" Match="NavLinkMatch.All">Linear</NavLink>
+        <NavLink class="nav-link" href="line-chart" Match="NavLinkMatch.All">Linear</NavLink>
     </li>
     <li class="nav-item">
         <NavLink class="nav-link" href="line-chart/log">Logarithmic</NavLink>
@@ -17,9 +17,6 @@
 
 @switch (ChartType)
 {
-    case "linear":
-        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />
-        break;
     case "log":
         <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LogarithmicChart />
         break;

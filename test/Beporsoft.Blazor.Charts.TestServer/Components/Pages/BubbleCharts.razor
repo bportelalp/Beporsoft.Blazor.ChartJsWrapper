@@ -5,13 +5,10 @@
 
 <ul class="nav nav-pills">
     <li class="nav-item">
-        <NavLink class="nav-link" href="bubble-chart/bubble" Match="NavLinkMatch.All">Bubble</NavLink>
+        <NavLink class="nav-link" href="bubble-chart" Match="NavLinkMatch.All">Bubble</NavLink>
     </li>
     <li class="nav-item">
         <NavLink class="nav-link" href="bubble-chart/mixed">Mixed</NavLink>
-    </li>
-    <li class="nav-item">
-        <NavLink class="nav-link" href="bubble-chart/time">Time</NavLink>
     </li>
 </ul>
 
@@ -24,7 +21,7 @@
         <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BubbleCharts.BubbleMixed />
         break;
     default:
-        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BubbleCharts.BubbleChart />
         break;
 }
 

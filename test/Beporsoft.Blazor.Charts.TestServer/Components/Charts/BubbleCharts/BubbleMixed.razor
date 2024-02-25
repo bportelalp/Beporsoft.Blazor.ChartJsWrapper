@@ -52,7 +52,7 @@
 
     private IChartDataset BuildBubbleDataset()
     {
-        var xD = RandomDataGen.GetDoubleSamples(-10, 10, 50).ToList();
+        var xD = RandomDataGen.GetNumberSeries(1, 50).ToList();
         var yD = RandomDataGen.GetDoubleSamples(-10, 10, 50).ToList();
         var zD = RandomDataGen.GetDoubleSamples(0, 100, 50).ToList();
         Func<double, double> converter = (z) => z / 10.0;

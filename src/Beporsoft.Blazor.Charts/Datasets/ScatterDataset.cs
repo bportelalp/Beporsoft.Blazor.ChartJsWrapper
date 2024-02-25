@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public class BubblePointFactory
+    public class ScatterDataset<T> : LineDataset<T>
     {
-        public BubblePointFactory(double scaleZ)
+        public ScatterDataset() : base(CartesianChartType.Scatter)
         {
-            ScaleZ = scaleZ;
+            
         }
-
-        public double ScaleZ { get; }
-
-
-
     }
 }
