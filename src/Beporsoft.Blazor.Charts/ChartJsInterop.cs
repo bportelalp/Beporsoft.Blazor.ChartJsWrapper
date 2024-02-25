@@ -1,9 +1,6 @@
 ﻿using Beporsoft.Blazor.Charts.Interop;
-using Beporsoft.Blazor.Charts.Serialization;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -26,16 +23,6 @@ namespace Beporsoft.Blazor.Charts
             _js = js;
             _logger = logger;
         }
-
-        private static JsonSerializerSettings JsonSettings { get; } = new JsonSerializerSettings
-        {
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy()
-            },
-            NullValueHandling = NullValueHandling.Ignore
-
-        };
 
         public async Task RenderChart(Chart chart)
         {

@@ -1,6 +1,4 @@
 ﻿using Beporsoft.Blazor.Charts.Common;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Configuration
 {
-    [JsonConverter(typeof(StringEnumConverter))]
     public class Position : StringEnumClass
     {
         private Position(string value) : base(value)

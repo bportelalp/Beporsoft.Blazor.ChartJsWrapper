@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Common
 {
-    [Newtonsoft.Json.JsonConverter(typeof(Serialization.JsonStringEnumClassConverter))]
     public class StringEnumClass
     {
         protected StringEnumClass(string value)

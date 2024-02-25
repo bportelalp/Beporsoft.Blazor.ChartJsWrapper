@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public class ScatterDataset<T> : LineDataset<T>
+    public class RadarChart<T> 
     {
-        public ScatterDataset() : base(CartesianChartType.Scatter)
-        {
-        }
     }
 }

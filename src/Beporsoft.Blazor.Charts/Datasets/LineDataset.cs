@@ -1,7 +1,5 @@
 ﻿using Beporsoft.Blazor.Charts.Common;
 using Beporsoft.Blazor.Charts.Configuration;
-using Beporsoft.Blazor.Charts.Serialization;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

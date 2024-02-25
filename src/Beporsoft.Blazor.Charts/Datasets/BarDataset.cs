@@ -50,11 +50,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
         /// </summary>
         public double? WidthPercentage { get; set; }
 
-        /// <summary>
-        /// Only with stacked axis, allow to stack datasets in groups. Datasets with the same
-        /// value on this property will be stacked together.
-        /// </summary>
-        public string? StackGroup { get; set; }
         #endregion
 
         #region Fluent methods

@@ -17,5 +17,7 @@ namespace Beporsoft.Blazor.Charts.Scales
         public static ScaleType Linear { get; set; } = new ScaleType("linear");
         public static ScaleType Logarithmic { get; set; } = new ScaleType("logarithmic");
         public static ScaleType Category { get; set; } = new ScaleType("category");
+        public static ScaleType Radial { get; set; } = new ScaleType("radar");
+        public static ScaleType RadialLinear { get; set; } = new ScaleType("radialLinear");
     }
 }
