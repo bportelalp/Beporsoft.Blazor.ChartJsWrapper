@@ -1,4 +1,5 @@
-﻿using Beporsoft.Blazor.Charts.Common;
+﻿using Beporsoft.Blazor.Charts.Cartesian;
+using Beporsoft.Blazor.Charts.Common;
 using Beporsoft.Blazor.Charts.Configuration;
 using Beporsoft.Blazor.Charts.Helpers;
 using System;
@@ -11,12 +12,11 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public class BarDataset<T> : ChartDataset<T>
+    public class BarDataset<T> : CartesianDataset<T>
     {
         #region Constructors
-        public BarDataset()
+        public BarDataset() : base(CartesianChartType.Bar)
         {
-            Type = ChartType.Bar;
         }
 
         public BarDataset(IEnumerable<T> data) : this()
@@ -50,6 +50,12 @@ namespace Beporsoft.Blazor.Charts.Datasets
         /// Percentage, between 0 and 1 of the available width.
         /// </summary>
         public double? WidthPercentage { get; set; }
+
+        /// <summary>
+        /// Only with stacked axis, allow to stack datasets in groups. Datasets with the same
+        /// value on this property will be stacked together.
+        /// </summary>
+        public string? StackGroup { get; set; }
         #endregion
 
         #region Fluent methods

@@ -14,10 +14,15 @@ namespace Beporsoft.Blazor.Charts.Common
     /// Represent the base class for chart dataset of type <typeparamref name="T"/>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class ChartDataset<T> : Collection<T>, IChartDataset<T>
+    public abstract class Dataset<T> : Collection<T>, IChartDataset<T>
     {
+        public Dataset(ChartType type)
+        {
+            Type = type;
+        }
+
         #region Properties
-        public ChartType? Type { get; set; }
+        public ChartType Type { get; protected set; }
 
         /// <summary>
         /// The label for the dataset which appears in legend and tooltip.
@@ -31,6 +36,12 @@ namespace Beporsoft.Blazor.Charts.Common
         /// If any value is provided, it will assumed the value of 'y'.
         /// </summary>
         public string? OrdinateAxisId { get; set; }
+
+        /// <summary>
+        /// Only with stacked axis, allow to stack datasets in groups. Datasets with the same
+        /// value on this property will be stacked together.
+        /// </summary>
+        public string? StackGroup { get; set; }
 
         #endregion
 

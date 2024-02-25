@@ -1,4 +1,5 @@
-﻿using Beporsoft.Blazor.Charts.Common;
+﻿using Beporsoft.Blazor.Charts.Cartesian;
+using Beporsoft.Blazor.Charts.Common;
 using Beporsoft.Blazor.Charts.Configuration;
 using Beporsoft.Blazor.Charts.Serialization;
 using Newtonsoft.Json;
@@ -11,11 +12,10 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
-    public sealed class LineDataset<T> : ChartDataset<T>
+    public sealed class LineDataset<T> : CartesianDataset<T>
     {
-        public LineDataset()
+        public LineDataset() : base(CartesianChartType.Line)
         {
-            Type = ChartType.Line;
         }
 
         public LineDataset(IEnumerable<T> data) : this()
@@ -47,6 +47,8 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public double? Tension { get; set; }
 
+        public bool? Fill { get; set; }
+
         public PointOptions PointOptions { get; set; } = new();
 
 
@@ -55,6 +57,12 @@ namespace Beporsoft.Blazor.Charts.Datasets
         public LineDataset<T> SetStepped()
         {
             Stepped = true;
+            return this;
+        }
+
+        public LineDataset<T> SetFill()
+        {
+            Fill = true;
             return this;
         }
 
@@ -97,9 +105,10 @@ namespace Beporsoft.Blazor.Charts.Datasets
                 obj.backgroundColor = ColorTranslator.ToHtml(BackgroundColor.Value);
             if (Stepped is not null)
                 obj.stepped = Stepped;
+            if(Fill is not null)
+                obj.fill = Fill;
 
             PointOptions?.AppendLineDatasetProperties(obj);
-
             return obj;
         }
     }

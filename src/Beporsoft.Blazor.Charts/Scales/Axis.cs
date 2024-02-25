@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Scales
 {
+    /// <summary>
+    /// The base class used to defined the chart axes.
+    /// </summary>
     public class Axis
     {
         public Axis(string axisId, ScaleType scaleType)

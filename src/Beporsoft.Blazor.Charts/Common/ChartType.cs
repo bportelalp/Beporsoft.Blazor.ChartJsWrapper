@@ -8,13 +8,10 @@ using Newtonsoft.Json.Converters;
 
 namespace Beporsoft.Blazor.Charts.Common
 {
-    public class ChartType : StringEnumClass
+    public abstract class ChartType : StringEnumClass
     {
         protected ChartType(string value) : base(value)
         {
         }
-        
-        public static ChartType Bar { get; } = new ChartType("bar");
-        public static ChartType Line { get; } = new ChartType("line");
     }
 }

@@ -19,7 +19,7 @@
             .WithLocation(Position.Top, Align.Center)
             .WithFont(16);
 
-        _config.AddLinearAxis("x")
+        _config.AddCategoryAxis("x")
             .AddTitle("X axis");
         _config.AddLinearAxis("y")
             .AddTitle("Y axis");
@@ -48,6 +48,17 @@
             // var dataset3 = BuildHighRangeDataset();
 
             _data.Labels = RandomDataGen.GetNumberSeries(1, 50).ToList();
+            _data.Labels = new List<DateTime>() {
+                new DateTime(2023, 1, 1),
+                new DateTime(2023, 2, 1),
+                new DateTime(2023, 3, 1),
+                new DateTime(2023, 4, 1),
+                new DateTime(2023, 5, 1),
+                new DateTime(2023, 6, 1),
+                new DateTime(2023, 7, 1),
+                new DateTime(2023, 8, 1),
+                new DateTime(2023, 9, 1),
+                new DateTime(2023, 10, 1), };
             _data.Datasets.Add(dataset1);
             _data.Datasets.Add(dataset2);
             // _data.Datasets.Add(dataset3);

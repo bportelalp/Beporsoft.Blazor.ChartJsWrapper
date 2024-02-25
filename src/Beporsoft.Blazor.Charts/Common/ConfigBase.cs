@@ -15,7 +15,7 @@ namespace Beporsoft.Blazor.Charts.Common
     public class ConfigBase : IChartJsObject
     {
 
-        public ChartType Type { get; set; } = ChartType.Bar;
+        //public ChartType Type { get; set; } = ChartType.Bar;
 
 
         public bool Responsive { get; set; } = true;
@@ -35,8 +35,39 @@ namespace Beporsoft.Blazor.Charts.Common
         public Dictionary<string,Axis>? Axes { get; set; }
 
         #region Fluent methods
+
+        /// <summary>
+        /// Adds a <see cref="CartesianAxis"/> whose values are continuos with a <see cref="ScaleType.Linear"/> scale
+        /// </summary>
+        /// <param name="axisId">The id of the axis. For two scales, common values should be 'x' or 'y'</param>
+        /// <returns>The generated axis, so multiple calls can be chained.</returns>
         public CartesianAxis AddLinearAxis(string axisId) => AddCartesianAxis(axisId, ScaleType.Linear);
+
+        /// <summary>
+        /// Adds a <see cref="CartesianAxis"/> whose values are continuos with a <see cref="ScaleType.Logarithmic"/> scale
+        /// </summary>
+        /// <param name="axisId">The id of the axis. For two scales, common values should be 'x' or 'y'</param>
+        /// <returns>The generated axis, so multiple calls can be chained.</returns>
         public CartesianAxis AddLogarithmicAxis(string axisId) => AddCartesianAxis(axisId, ScaleType.Logarithmic);
+
+        /// <summary>
+        /// Adds a <see cref="CartesianAxis"/> whose values are considered discrete values.
+        /// </summary>
+        /// <param name="axisId">The id of the axis. For two scales, common values should be 'x' or 'y'</param>
+        /// <returns>The generated axis, so multiple calls can be chained.</returns>
+        public CategoryAxis AddCategoryAxis(string axisId) {
+            Axes ??= new Dictionary<string, Axis>();
+            CategoryAxis axis = new(axisId, ScaleType.Category);
+            Axes.Add(axisId, axis);
+            return axis;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="CartesianAxis"/> with the given scale.
+        /// </summary>
+        /// <param name="axisId">The id of the axis. For two scales, common values should be 'x' or 'y'</param>
+        /// <param name="scaleType">The scale type.</param>
+        /// <returns>The generated axis, so multiple calls can be chained.</returns>
         public CartesianAxis AddCartesianAxis(string axisId, ScaleType scaleType)
         {
             Axes ??= new Dictionary<string,Axis>();
@@ -50,7 +81,7 @@ namespace Beporsoft.Blazor.Charts.Common
         public virtual object ToChartObject()
         {
             dynamic obj = new ExpandoObject();
-            obj.type = Type.Value;
+            //obj.type = Type.Value;
             obj.options = BuildOptionsNode();
 
             return obj;
