@@ -1,0 +1,33 @@
+﻿@page "/bubble-chart"
+@page "/bubble-chart/{ChartType}"
+
+
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <NavLink class="nav-link" href="bubble-chart/bubble" Match="NavLinkMatch.All">Bubble</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="bubble-chart/mixed">Mixed</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="bubble-chart/time">Time</NavLink>
+    </li>
+</ul>
+
+@switch (ChartType)
+{
+    case "bubble":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BubbleCharts.BubbleChart />
+        break;
+    case "mixed":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BubbleCharts.BubbleMixed />
+        break;
+    default:
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />
+        break;
+}
+
+@code {
+    [Parameter] public string? ChartType { get; set; } = default!;
+}
