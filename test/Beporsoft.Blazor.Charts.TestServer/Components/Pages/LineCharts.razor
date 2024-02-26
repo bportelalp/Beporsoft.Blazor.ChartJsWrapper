@@ -13,6 +13,9 @@
     <li class="nav-item">
         <NavLink class="nav-link" href="line-chart/object-data">Object data</NavLink>
     </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="line-chart/scatter">Scatter</NavLink>
+    </li>
 </ul>
 
 @switch (ChartType)
@@ -22,6 +25,9 @@
         break;
     case "object-data":
         <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearObjectDataChart />
+        break;
+    case "scatter":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearScatterChart />
         break;
     default:
         <Beporsoft.Blazor.Charts.TestServer.Components.Charts.LineCharts.LinearChart />

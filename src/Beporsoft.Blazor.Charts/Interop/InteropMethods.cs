@@ -9,5 +9,6 @@ namespace Beporsoft.Blazor.Charts.Interop
     internal class InteropMethods
     {
         public const string ActivateChart = "activateChart";
+        public const string DisposeChart = "disposeChart";
     }
 }

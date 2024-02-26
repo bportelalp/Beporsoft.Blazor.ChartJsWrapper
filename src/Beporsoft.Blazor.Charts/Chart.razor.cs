@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Beporsoft.Blazor.Charts
 {
-    public partial class Chart : ComponentBase
+    public partial class Chart : ComponentBase, IDisposable
     {
 
         #region Injects
@@ -46,9 +46,18 @@ namespace Beporsoft.Blazor.Charts
         #endregion
 
         #region Interface
+        public async void Dispose()
+        {
+            await ChartInterop.DisposeChart(this);
+        }
         #endregion
 
         #region Methods
+        public async Task Render()
+        {
+            await ChartInterop.RenderChart(this);
+        }
+
         #endregion
 
         #region UI Handlers

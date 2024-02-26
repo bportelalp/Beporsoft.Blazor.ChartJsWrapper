@@ -1,0 +1,97 @@
+﻿@using Beporsoft.Blazor.Charts.Common
+@using Beporsoft.Blazor.Charts.Configuration
+@using System.Drawing
+
+<div class="d-flex">
+    <div>
+        <button class="btn btn-outline-primary" @onclick="HandleLinearDataset">
+            @(_lineDatasetAdded ? "Remove line dataset" : "Append line dataset")
+        </button>
+    </div>
+</div>
+
+<Chart @ref="_chart" Config="_config" Data="_data" />
+
+
+@code {
+    private Chart? _chart;
+
+    private ConfigBase _config = new();
+    private ChartData _data = new();
+    private bool _lineDatasetAdded = false;
+
+
+    protected override void OnInitialized()
+    {
+        _config = new ConfigBase();
+        _config.Options
+            .AddTitle("Scatter chart")
+            .WithLocation(Position.Top, Align.Center)
+            .WithFont(16);
+
+        _config.AddLinearAxis("x")
+            .AddTitle("X axis");
+        _config.AddLinearAxis("y")
+            .AddTitle("Y axis");
+
+        _config.Options
+            .AddSubtitle($"This is one scatter chart. It can be mixed, for example, with a line dataset")
+            .WithFont(12);
+
+        base.OnInitialized();
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+
+        return base.OnParametersSetAsync();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            var scatterDataset = BuildScatterDataset();
+
+            _data.Labels = RandomDataGen.GetNumberSeries(1, 50).ToList();
+            _data.Datasets.Add(scatterDataset);
+        }
+    }
+
+    private void HandleLinearDataset()
+    {
+        if (_lineDatasetAdded)
+        {
+            _data.Datasets.RemoveAt(_data.Datasets.Count - 1);
+        }
+        else
+        {
+            var lineDataset = BuildContinuousDataset();
+            _data.Datasets.Add(lineDataset);
+        }
+        _ = _chart!.Render();
+        _lineDatasetAdded = !_lineDatasetAdded;
+    }
+
+
+
+    private LineDataset<double> BuildContinuousDataset()
+    {
+        var data = RandomDataGen.GetDoubleSamples(-10, 10, 50);
+        var dataset = new LineDataset<double>("Continuous line", data);
+        dataset.SetLineColor(Color.FromArgb(100, 200, 100))
+            .SetPointStyle(PointStyle.Triangle, 6);
+
+        return dataset;
+    }
+
+    private ScatterDataset<double> BuildScatterDataset()
+    {
+        var data = RandomDataGen.GetDoubleSamples(40, 50, 50);
+        var dataset = new ScatterDataset<double>("Scatter dataset", data);
+
+        return dataset;
+    }
+
+}

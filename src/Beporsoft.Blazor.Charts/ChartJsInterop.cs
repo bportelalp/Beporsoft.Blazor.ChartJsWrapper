@@ -43,6 +43,13 @@ namespace Beporsoft.Blazor.Charts
 
         }
 
+        public async Task DisposeChart(Chart chart)
+        {
+            var module = await GetModule();
+
+            await module.InvokeVoidAsync(InteropMethods.DisposeChart, chart.ChartId);
+        }
+
 
         private async Task<IJSObjectReference> GetModule()
         {
