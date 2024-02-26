@@ -47,5 +47,19 @@
             }
         }
 
+        public static IEnumerable<string> GetMonths(int amount)
+        {
+            var year = DateTime.Now.Year;
+            DateTime start = new DateTime(year, 1, 1);
+            List<DateTime> dates = new List<DateTime>();
+            foreach (var number in Enumerable.Range(0, amount))
+            {
+                DateTime nextMonth = start.AddMonths(number);
+                dates.Add(nextMonth);
+            }
+            return dates.Select(d => d.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.YearMonthPattern)).ToList();
+        }
+
+
     }
 }

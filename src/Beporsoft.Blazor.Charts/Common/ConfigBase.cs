@@ -15,7 +15,7 @@ namespace Beporsoft.Blazor.Charts.Common
     public class ConfigBase : IChartJsObject
     {
 
-        //public ChartType Type { get; set; } = ChartType.Bar;
+        public ChartType Type { get; set; }
 
 
         public bool Responsive { get; set; } = true;
@@ -28,11 +28,11 @@ namespace Beporsoft.Blazor.Charts.Common
         /// </summary>
         public string? MainAxis { get; set; }
 
-        public  CultureInfo?  Locale { get; set; }
+        public CultureInfo? Locale { get; set; }
 
         public Options Options { get; set; } = new();
 
-        public Dictionary<string,Axis>? Axes { get; set; }
+        public Dictionary<string, Axis>? Axes { get; set; }
 
         #region Fluent methods
 
@@ -55,7 +55,8 @@ namespace Beporsoft.Blazor.Charts.Common
         /// </summary>
         /// <param name="axisId">The id of the axis. For two scales, common values should be 'x' or 'y'</param>
         /// <returns>The generated axis, so multiple calls can be chained.</returns>
-        public CategoryAxis AddCategoryAxis(string axisId) {
+        public CategoryAxis AddCategoryAxis(string axisId)
+        {
             Axes ??= new Dictionary<string, Axis>();
             CategoryAxis axis = new(axisId, ScaleType.Category);
             Axes.Add(axisId, axis);
@@ -70,7 +71,7 @@ namespace Beporsoft.Blazor.Charts.Common
         /// <returns>The generated axis, so multiple calls can be chained.</returns>
         public CartesianAxis AddCartesianAxis(string axisId, ScaleType scaleType)
         {
-            Axes ??= new Dictionary<string,Axis>();
+            Axes ??= new Dictionary<string, Axis>();
 
             CartesianAxis axis = new(axisId, scaleType);
             Axes.Add(axisId, axis);
@@ -81,7 +82,8 @@ namespace Beporsoft.Blazor.Charts.Common
         public virtual object ToChartObject()
         {
             dynamic obj = new ExpandoObject();
-            //obj.type = Type.Value;
+            if (Type is not null)
+                obj.type = Type.Value;
             obj.options = BuildOptionsNode();
 
             return obj;

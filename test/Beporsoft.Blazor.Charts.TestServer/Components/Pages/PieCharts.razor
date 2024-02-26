@@ -1,0 +1,33 @@
+﻿@page "/pie-chart"
+@page "/pie-chart/{ChartType}"
+
+
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <NavLink class="nav-link" href="pie-chart" Match="NavLinkMatch.All">Pie</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="pie-chart/doughnut">Doughnut</NavLink>
+    </li>
+    <li class="nav-item">
+        <NavLink class="nav-link" href="pie-chart/pie-multi">Pie multi</NavLink>
+    </li>
+</ul>
+
+@switch (ChartType)
+{
+    case "doughnut":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BarCharts.HorizontalBarChart />
+        break;
+    case "pie-multi":
+        <Beporsoft.Blazor.Charts.TestServer.Components.Charts.BarCharts.StackedBarChart />
+        break;
+    default:
+    <Beporsoft.Blazor.Charts.TestServer.Components.Charts.PieCharts.PieChart />
+        break;
+}
+
+@code {
+    [Parameter] public string? ChartType { get; set; } = default!;
+}
