@@ -1,5 +1,6 @@
 ﻿using Beporsoft.Blazor.Charts.Common;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
+
     /// <summary>
     /// Represent the base class for chart dataset of type <typeparamref name="T"/>
     /// </summary>
@@ -31,19 +33,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
         public string Label { get; set; } = string.Empty;
 
         public ICollection<T> Data => Items;
-
-        /// <summary>
-        /// Gets or sets the identifier for the ordinate axis, commonly y-axis on a cartesian system.
-        /// If any value is provided, it will assumed the value of 'y'.
-        /// </summary>
-        public string? OrdinateAxisId { get; set; }
-
-        /// <summary>
-        /// Only with stacked axis, allow to stack datasets in groups. Datasets with the same
-        /// value on this property will be stacked together.
-        /// </summary>
-        public string? StackGroup { get; set; }
-
         #endregion
 
         protected virtual dynamic BuildJsObject()
@@ -52,10 +41,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
             obj.label = Label;
             obj.type = Type?.Value;
             obj.data = Items;
-
-            if (OrdinateAxisId is not null)
-                obj.yAxisID = OrdinateAxisId;
-
             return obj;
         }
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,44 +55,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
 
         #region Fluent methods
-        public LineDataset<T> SetStepped()
-        {
-            Stepped = true;
-            return this;
-        }
 
-        public LineDataset<T> SetFill()
-        {
-            Fill = true;
-            return this;
-        }
-
-        public LineDataset<T> SetLineColor(Color lineColor)
-        {
-            BorderColor = lineColor;
-            BackgroundColor = lineColor;
-            return this;
-        }
-
-        public LineDataset<T> SetPointStyle(PointStyle style, int radius)
-        {
-            PointOptions.PointStyle = style;
-            PointOptions.Radius = radius;
-            PointOptions.HoverRadius = radius + 3;
-            return this;
-        }
-
-        /// <summary>
-        /// Provides the Id of the vertical axis which will be used with this dataset. It is
-        /// usefull only when multiple y axis are configured. Defaults to 'y'.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public LineDataset<T> SetVerticalAxis(string id)
-        {
-            OrdinateAxisId = id;
-            return this;
-        }
         #endregion
 
 
@@ -110,6 +74,50 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
             PointOptions?.AppendLineDatasetProperties(obj);
             return obj;
+        }
+    }
+
+
+    public static class LineDatasetExtensions
+    {
+        public static LineDataset<T> SetStepped<T>(this LineDataset<T> dataset)
+        {
+            dataset.Stepped = true;
+            return dataset;
+        }
+
+        public static LineDataset<T> SetFill<T>(this LineDataset<T> dataset)
+        {
+            
+            dataset.Fill = true;
+            return dataset;
+        }
+
+        public static LineDataset<T> SetLineColor<T>(this LineDataset<T> dataset, Color lineColor)
+        {
+            dataset.BorderColor = lineColor;
+            dataset.BackgroundColor = lineColor;
+            return dataset;
+        }
+
+        public static LineDataset<T> SetPointStyle<T>(this LineDataset<T> dataset, PointStyle style, int radius)
+        {
+            dataset.PointOptions.PointStyle = style;
+            dataset.PointOptions.Radius = radius;
+            dataset.PointOptions.HoverRadius = radius + 3;
+            return dataset;
+        }
+
+        /// <summary>
+        /// Provides the Id of the vertical axis which will be used with this dataset. It is
+        /// usefull only when multiple y axis are configured. Defaults to 'y'.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static LineDataset<T> SetVerticalAxis<T>(this LineDataset<T> dataset, string id)
+        {
+            dataset.OrdinateAxisId = id;
+            return dataset;
         }
     }
 }

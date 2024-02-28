@@ -15,6 +15,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public static PolarChartType Pie { get; } = new PolarChartType("pie");
         public static PolarChartType Doughnut { get; } = new PolarChartType("doughnut");
-        public static PolarChartType Radar { get; } = new PolarChartType("radar");
+        public static PolarChartType PolarArea { get; } = new PolarChartType("polarArea");
     }
 }

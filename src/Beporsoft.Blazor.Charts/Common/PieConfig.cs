@@ -15,9 +15,9 @@ namespace Beporsoft.Blazor.Charts.Common
 {
     public class PieConfig : ConfigBase
     {
-        public PieConfig()
+        public PieConfig(PolarChartType type)
         {
-            Type = PolarChartType.Pie;
+            Type = type;
         }
     }
 }

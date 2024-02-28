@@ -11,21 +11,21 @@
     private int _samples = 4;
     private Chart? _chart;
 
-    private PieConfig _config = new(PolarChartType.Pie);
+    private PieConfig _config = new(PolarChartType.Doughnut);
     private ChartData _data = new();
 
 
     protected override void OnInitialized()
     {
-        _config = new PieConfig(PolarChartType.Pie);
+        _config = new PieConfig(PolarChartType.Doughnut);
         _config.Options
-            .AddTitle("Pie chart")
+            .AddTitle("Doughnut chart")
             .WithLocation(Position.Top, Align.Center)
             .WithFont(16);
 
 
         _config.Options
-            .AddSubtitle($"A pie chart. Unlike others charts, here the legend show the labels.")
+            .AddSubtitle($"A doughnut chart. Unlike others charts, here the legend show the labels.")
             .WithFont(12);
 
         base.OnInitialized();
@@ -42,17 +42,17 @@
         if (firstRender)
         {
 
-            var dataset1 = BuildPieDataset();
+            var dataset1 = BuildDoughnut().SetCutout(0.3);
             _data.Labels = RandomDataGen.GetMonths(_samples).ToList();
             _data.Datasets.Add(dataset1);
         }
     }
 
-    private PolarDataset<int> BuildPieDataset()
+    private DoughnutDataset<int> BuildDoughnut()
     {
         var values = RandomDataGen.GetIntegerSamples(0, 30, _samples).ToList();
 
-        var dataset = new PolarDataset<int>(PolarChartType.Pie,"Pie dataset", values);
+        var dataset = new DoughnutDataset<int>("Doughnut dataset", values);
 
         return dataset;
     }
