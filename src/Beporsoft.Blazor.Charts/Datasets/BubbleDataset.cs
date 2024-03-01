@@ -1,4 +1,5 @@
 ﻿using Beporsoft.Blazor.Charts.Common;
+using Beporsoft.Blazor.Charts.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,26 @@ namespace Beporsoft.Blazor.Charts.Datasets
             Label = title;
         }
         #endregion
+
+        /// <summary>
+        /// Configures how the points interact on hover
+        /// </summary>
+        public HoverOptions HoverOptions { get; set; } = new();
+
+        /// <summary>
+        /// Configures the bubble points styling.
+        /// </summary>
+        public PointOptions? PointOptions { get; set; }
+
+        protected override dynamic BuildJsObject()
+        {
+            dynamic obj = base.BuildJsObject();
+
+            PointOptions?.AppendBubbleOptions(obj);
+            HoverOptions?.AppendPointInteractions(obj);
+
+            return obj;
+        }
     }
 
     public class BubbleDataset<Txy, Tz> : BubbleDataset<Txy, Txy, Tz>

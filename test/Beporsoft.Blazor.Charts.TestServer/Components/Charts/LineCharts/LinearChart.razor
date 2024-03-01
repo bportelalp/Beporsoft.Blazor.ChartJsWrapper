@@ -51,6 +51,9 @@
             var dataset2 = BuildSteppedDataset();
             var dataset3 = BuildHighRangeDataset();
 
+            dataset3.AddLineOptions()
+                .WithStyle(CapStyle.Round, 0.3);
+
             _data.Labels = RandomDataGen.GetNumberSeries(1, 50).ToList();
             _data.Datasets.Add(dataset1);
             _data.Datasets.Add(dataset2);
@@ -58,7 +61,7 @@
         }
     }
 
-    private IChartDataset BuildContinuousDataset()
+    private LineDataset<double> BuildContinuousDataset()
     {
         var data = RandomDataGen.GetDoubleSamples(-10, 10, 50);
         var dataset = new LineDataset<double>("Continuous line", data);
@@ -68,7 +71,7 @@
         return dataset;
     }
 
-    private IChartDataset BuildSteppedDataset()
+    private LineDataset<double> BuildSteppedDataset()
     {
         var data = RandomDataGen.GetDoubleSamples(40, 50, 50);
         var dataset = new LineDataset<double>("Stepped line", data);
@@ -78,7 +81,7 @@
         return dataset;
     }
 
-    private IChartDataset BuildHighRangeDataset()
+    private LineDataset<double> BuildHighRangeDataset()
     {
         var data = RandomDataGen.GetDoubleSamples(1500, 2300, 50);
         var dataset = new LineDataset<double>("High range dataset", data);

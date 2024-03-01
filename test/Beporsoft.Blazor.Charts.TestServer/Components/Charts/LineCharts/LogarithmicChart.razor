@@ -31,7 +31,8 @@
 
 
         _config.Options
-            .AddSubtitle($"This is a line chart where a high range dataset is represented on a linear axis and on logarithmic axis")
+            .AddSubtitle($"This is a line chart where a high range dataset is represented on a linear axis and on logarithmic axis. " +
+            "Linear line has small points but with a increaset hit radius, so hovering it displays the tooltip. Logarithmic has no points so tooltip is not displayed.")
             .WithFont(12);
 
         base.OnInitialized();
@@ -50,10 +51,12 @@
 
             var data = RandomDataGen.GetDoubleLinearSamples(1500, 150000, 50);
             var datasetLinear = new LineDataset<double>("Linear", data);
-            datasetLinear.SetVerticalAxis("y");
+            datasetLinear.SetVerticalAxis("y")
+                .AddPointOptions().WithRadius(1).WithHitRadius(10);
 
             var datasetLog = new LineDataset<double>("logarithmic", data);
-            datasetLog.SetVerticalAxis("ylog");
+            datasetLog.SetVerticalAxis("ylog")
+                .SupressPoints();
 
             _data.Labels = RandomDataGen.GetNumberSeries(0, 51).ToList();
             _data.Datasets.Add(datasetLinear);

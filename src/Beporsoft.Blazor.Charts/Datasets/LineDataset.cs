@@ -13,14 +13,10 @@ namespace Beporsoft.Blazor.Charts.Datasets
     public class LineDataset<T> : CartesianDataset<T>
     {
 
-        public LineDataset() : base(CartesianChartType.Line)
-        {
-        }
+        #region Constructors
+        public LineDataset() : base(CartesianChartType.Line) { }
 
-        protected LineDataset(CartesianChartType type) : base(type)
-        {
-
-        }
+        protected LineDataset(CartesianChartType type) : base(type) { }
 
         public LineDataset(IEnumerable<T> data) : this()
         {
@@ -31,6 +27,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
         {
             Label = title;
         }
+        #endregion
 
         /// <summary>
         /// The color applied to the line and the border of points.
@@ -38,19 +35,29 @@ namespace Beporsoft.Blazor.Charts.Datasets
         public Color? BorderColor { get; set; }
 
         /// <summary>
-        /// The color applied to the fill of points.
+        /// The color applied to the fill of points and under line if activated.
         /// </summary>
         public Color? BackgroundColor { get; set; }
 
-        public int? BorderWidth { get; set; }
-
+        /// <summary>
+        /// Set to <see langword="true"/> for a stepped chart.
+        /// </summary>
         public bool? Stepped { get; set; }
 
-        public double? Tension { get; set; }
+        /// <summary>
+        /// Configures the style of points.
+        /// </summary>
+        public PointOptions? PointOptions { get; set; } = new();
 
-        public bool? Fill { get; set; }
+        /// <summary>
+        /// Configures the style of line.
+        /// </summary>
+        public LineOptions? LineOptions { get; set; } = new();
 
-        public PointOptions PointOptions { get; set; } = new();
+        /// <summary>
+        /// Configures how the points interact on hover
+        /// </summary>
+        public HoverOptions? HoverOptions { get; set; } = new();
 
 
 
@@ -69,10 +76,10 @@ namespace Beporsoft.Blazor.Charts.Datasets
                 obj.backgroundColor = ColorTranslator.ToHtml(BackgroundColor.Value);
             if (Stepped is not null)
                 obj.stepped = Stepped;
-            if(Fill is not null)
-                obj.fill = Fill;
 
-            PointOptions?.AppendLineDatasetProperties(obj);
+            LineOptions?.AppendLineDatasetProperties(obj);
+            PointOptions?.AppendPointOptions(obj);
+            HoverOptions?.AppendPointInteractions(obj);
             return obj;
         }
     }
@@ -86,13 +93,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
             return dataset;
         }
 
-        public static LineDataset<T> SetFill<T>(this LineDataset<T> dataset)
-        {
-            
-            dataset.Fill = true;
-            return dataset;
-        }
-
         public static LineDataset<T> SetLineColor<T>(this LineDataset<T> dataset, Color lineColor)
         {
             dataset.BorderColor = lineColor;
@@ -102,9 +102,8 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         public static LineDataset<T> SetPointStyle<T>(this LineDataset<T> dataset, PointStyle style, int radius)
         {
-            dataset.PointOptions.PointStyle = style;
+            dataset.PointOptions.Style = style;
             dataset.PointOptions.Radius = radius;
-            dataset.PointOptions.HoverRadius = radius + 3;
             return dataset;
         }
 
@@ -118,6 +117,53 @@ namespace Beporsoft.Blazor.Charts.Datasets
         {
             dataset.OrdinateAxisId = id;
             return dataset;
+        }
+
+        /// <summary>
+        /// Configures the dataset to supress the points rendering.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataset"></param>
+        /// <returns>The same dataset instance so multiple calls can be chained.</returns>
+        public static LineDataset<T> SupressPoints<T>(this LineDataset<T> dataset)
+        {
+            dataset.PointOptions = new PointOptions
+            {
+                Radius = 0
+            };
+            return dataset;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="PointOptions"/> instance to the dataset for configuration of point styling.
+        /// </summary>
+        /// <returns>The <see cref="PointOptions"/> instance created for further configuring.</returns>
+        public static PointOptions AddPointOptions<T>(this LineDataset<T> dataset)
+        {
+            dataset.PointOptions = new();
+            return dataset.PointOptions;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="LineOptions"/> instance to the dataset for configuration of line styling.
+        /// </summary>
+        /// <returns>The <see cref="LineOptions"/> instance created for further configuring.</returns>
+        public static LineOptions AddLineOptions<T>(this LineDataset<T> dataset)
+        {
+            dataset.LineOptions = new();
+            return dataset.LineOptions;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="HoverOptions"/> instance to the dataset for configuring the hover interactions.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataset"></param>
+        /// <returns>The <see cref="HoverOptions"/> instance created for further configuring.</returns>
+        public static HoverOptions AddHoverOptions<T>(this LineDataset<T> dataset)
+        {
+            dataset.HoverOptions = new();
+            return dataset.HoverOptions;
         }
     }
 }
