@@ -12,6 +12,15 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
+    public abstract class Dataset
+    {
+        /// <summary>
+        /// This methods converts the <see cref="Dataset"/> content to the understandable object
+        /// for the Chart.js JavaScript side.
+        /// </summary>
+        /// <returns></returns>
+        public abstract object BuildChartJsObject();
+    }
 
     /// <summary>
     /// Represent the base class for chart dataset of type <typeparamref name="T"/>

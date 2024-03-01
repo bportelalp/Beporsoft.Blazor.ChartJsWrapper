@@ -2,6 +2,14 @@
 @using Beporsoft.Blazor.Charts.Configuration
 @using System.Drawing
 
+<div class="d-flex">
+    <div>
+        <button class="btn btn-outline-primary" @onclick="AddOrRemoveDataset">
+            @(_lineDatasetAdded ? "Remove pie dataset" : "Append new pie dataset")
+        </button>
+    </div>
+</div>
+
 <div style="max-height: 80vh">
     <Chart @ref="_chart" Config="_config" Data="_data" />
 </div>
@@ -13,6 +21,7 @@
 
     private PieConfig _config = new(PolarChartType.Pie);
     private ChartData _data = new();
+    private bool _lineDatasetAdded = false;
 
 
     protected override void OnInitialized()
@@ -41,18 +50,33 @@
     {
         if (firstRender)
         {
-
-            var dataset1 = BuildPieDataset();
+            var dataset1 = BuildRandomPieDataset();
             _data.Labels = RandomDataGen.GetMonths(_samples).ToList();
             _data.Datasets.Add(dataset1);
         }
     }
 
-    private PolarDataset<int> BuildPieDataset()
+
+    private void AddOrRemoveDataset()
+    {
+        if (_lineDatasetAdded)
+        {
+            _data.Datasets.RemoveAt(_data.Datasets.Count - 1);
+        }
+        else
+        {
+            var dataset = BuildRandomPieDataset("Second dataset");
+            _data.Datasets.Add(dataset);
+        }
+        _lineDatasetAdded = !_lineDatasetAdded;
+        _ = _chart!.Render();
+    }
+
+    private PolarDataset<int> BuildRandomPieDataset(string title = "Pie dataset")
     {
         var values = RandomDataGen.GetIntegerSamples(0, 30, _samples).ToList();
 
-        var dataset = new PolarDataset<int>(PolarChartType.Pie,"Pie dataset", values);
+        var dataset = new PolarDataset<int>(PolarChartType.Pie, title, values);
 
         return dataset;
     }

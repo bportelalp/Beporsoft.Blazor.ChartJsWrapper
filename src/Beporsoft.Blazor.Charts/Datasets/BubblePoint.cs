@@ -7,6 +7,17 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Datasets
 {
+    /// <summary>
+    /// Represent a <see cref="DataPoint{Tx, Ty}"/> with the third-dimension value to be used with the
+    /// <see cref="BubbleDataset{Tx, Ty, Tz}"/>.
+    /// <para>
+    /// The third dimension is represented as pixels value of the bubble, so it can be provided a converter from the 
+    /// real value to the pixels value.
+    /// </para>
+    /// </summary>
+    /// <typeparam name="Tx"></typeparam>
+    /// <typeparam name="Ty"></typeparam>
+    /// <typeparam name="Tz"></typeparam>
     public class BubblePoint<Tx, Ty, Tz> : DataPoint<Tx, Ty>
     {
 

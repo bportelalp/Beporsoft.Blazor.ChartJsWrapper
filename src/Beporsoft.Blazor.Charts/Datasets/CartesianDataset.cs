@@ -12,7 +12,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
     /// Represent a dataset whose values can be represented in a cartesian system.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CartesianDataset<T> : Dataset<T>
+    public abstract class CartesianDataset<T> : Dataset<T>
     {
         public CartesianDataset(ChartType type) : base(type)
         {

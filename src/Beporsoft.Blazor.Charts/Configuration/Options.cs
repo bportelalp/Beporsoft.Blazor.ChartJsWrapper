@@ -18,18 +18,32 @@ namespace Beporsoft.Blazor.Charts.Configuration
 
 
         #region Fluent methods
+        /// <summary>
+        /// Add a title to chart initialized with the given text.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public TitleOptions AddTitle(string text)
         {
             Title = new TitleOptions(text);
             return Title;
         }
 
+        /// <summary>
+        /// Adds a subtitle initialized with the given text.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public TitleOptions AddSubtitle(string text)
         {
             Subtitle = new TitleOptions(text);
             return Subtitle;
         }
 
+        /// <summary>
+        /// Adds a <see cref="LegendOptions"/> to the chart, starting its configuration on the following calls.
+        /// </summary>
+        /// <returns>The <see cref="LegendOptions"/> appended, so multiple calls can be chained.</returns>
         public LegendOptions ConfigureLegend()
         {
             Legend = new LegendOptions();

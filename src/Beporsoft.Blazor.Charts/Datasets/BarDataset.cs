@@ -52,28 +52,6 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         #endregion
 
-        #region Fluent methods
-        /// <summary>
-        /// Sets the color for both border and fill of bar.
-        /// </summary>
-        /// <param name="color"></param>
-        /// <returns></returns>
-        public BarDataset<T> SetBarColor(Color color)
-        {
-            BorderColor = color;
-            BackgroundColor = color;
-            return this;
-        }
-
-        public BarDataset<T> SetBorder(Color color, int width)
-        {
-            BorderWidth = width;
-            BorderColor = color;
-            return this;
-        }
-        #endregion
-
-
         protected override dynamic BuildJsObject()
         {
             dynamic obj = base.BuildJsObject();
@@ -86,6 +64,34 @@ namespace Beporsoft.Blazor.Charts.Datasets
             if (WidthPercentage is not null)
                 obj.barPercentage = NumberHelpers.AdjustInterval(WidthPercentage.Value, 0, 1);
             return obj;
+        }
+    }
+
+    public static class BarDatasetExtensions
+    {
+
+        /// <summary>
+        /// Sets the color for both border and fill of bar.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns>The same dataset instance so multiple calls can be chained.</returns>
+        public static BarDataset<T> SetBarColor<T>(this BarDataset<T> dataset, Color color)
+        {
+            dataset.BorderColor = color;
+            dataset.BackgroundColor = color;
+            return dataset;
+        }
+
+        /// <summary>
+        /// Sets border for bars.
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns>The same dataset instance so multiple calls can be chained.</returns>
+        public static BarDataset<T> SetBorder<T>(this BarDataset<T> dataset, Color color, int width)
+        {
+            dataset.BorderWidth = width;
+            dataset.BorderColor = color;
+            return dataset;
         }
     }
 }

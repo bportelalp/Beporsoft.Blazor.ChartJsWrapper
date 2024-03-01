@@ -43,6 +43,13 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
     public static class DoughnutDatasetExtensions
     {
+        /// <summary>
+        /// Configures the percentage of the doughnut total radius which is a hole.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataset"></param>
+        /// <param name="cutoutPercentage"></param>
+        /// <returns></returns>
         public static DoughnutDataset<T> SetCutout<T>(this DoughnutDataset<T> dataset, double? cutoutPercentage)
         {
             dataset.CutoutPercentage = cutoutPercentage;

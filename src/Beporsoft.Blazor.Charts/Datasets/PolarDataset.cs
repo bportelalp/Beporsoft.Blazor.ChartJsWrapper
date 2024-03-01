@@ -13,6 +13,7 @@ namespace Beporsoft.Blazor.Charts.Datasets
         public PolarDataset(PolarChartType type) : base(type)
         {
         }
+
         public PolarDataset(PolarChartType type, IEnumerable<T> data) : this(type)
         {
             this.AddRange(data);
@@ -23,8 +24,27 @@ namespace Beporsoft.Blazor.Charts.Datasets
             Label = title;
         }
 
-        public Color BackgroundColor { get; set; }
-        public Color BorderColor { get;}
+        /// <summary>
+        /// The collection of colors displayed for each pie chart portion. It should have the same
+        /// length than <see cref="Dataset{T}.Data"/>.
+        /// </summary>
+        public ICollection<Color> BackgroundColor { get; set; } = new List<Color>();
+
+        /// <summary>
+        /// The collection of colors displayed for each pie chart portion on border. It should have the same
+        /// length than <see cref="Dataset{T}.Data"/>.
+        /// </summary>
+        public ICollection<Color> BorderColor { get;} = new List<Color>();
         public int BorderWidth { get; set; }
+
+        protected override dynamic BuildJsObject()
+        {
+            dynamic obj = base.BuildJsObject();
+            if (BackgroundColor?.Any() is true)
+                obj.backgroundColor = BackgroundColor.Select(ColorTranslator.ToHtml).ToArray();
+            if(BorderColor?.Any() is true)
+                obj.borderColor = BorderColor.Select(ColorTranslator.ToHtml).ToArray();
+            return obj;
+        }
     }
 }

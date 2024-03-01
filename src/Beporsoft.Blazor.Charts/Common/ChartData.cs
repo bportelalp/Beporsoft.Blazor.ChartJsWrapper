@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Common
 {
-    public sealed class ChartData : IChartJsObject
+    public class ChartData : IChartJsObject
     {
 
         public IList Labels { get; set; } = new List<string>();
