@@ -30,7 +30,6 @@
         _config.Options
             .AddSubtitle($"A bar chart with horizontal bars")
             .WithFont(12);
-
         base.OnInitialized();
     }
 
@@ -46,14 +45,13 @@
 
             var dataset1 = BuildContinuousDataset();
             var dataset2 = BuildSecondContinuousDataset();
-
             _data.Labels = RandomDataGen.GetNumberSeries(1, 50).ToList();
             _data.Datasets.Add(dataset1);
             _data.Datasets.Add(dataset2);
         }
     }
 
-    private IChartDataset BuildContinuousDataset()
+    private BarDataset<double> BuildContinuousDataset()
     {
         var data = RandomDataGen.GetDoubleSamples(0, 20, 10);
         var dataset = new BarDataset<double>("Bar", data);
@@ -61,7 +59,7 @@
 
         return dataset;
     }
-    private IChartDataset BuildSecondContinuousDataset()
+    private BarDataset<double> BuildSecondContinuousDataset()
     {
         var data = RandomDataGen.GetDoubleSamples(0, 20, 10);
         var dataset = new BarDataset<double>("Thinner bar", data);

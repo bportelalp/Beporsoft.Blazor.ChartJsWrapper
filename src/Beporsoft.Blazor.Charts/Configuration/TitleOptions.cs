@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts.Configuration
 {
+    /// <summary>
+    /// Contains the title or subtitle configuration.
+    /// </summary>
     public class TitleOptions
     {
         public TitleOptions(string text)
@@ -15,19 +18,24 @@ namespace Beporsoft.Blazor.Charts.Configuration
             Text = text;
         }
 
-
+        /// <summary>
+        /// Text displayed.
+        /// </summary>
         public string Text { get; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the position of the title around the chart.
+        /// The position around the chart.
         /// </summary>
         public Position Position { get; set; } = Position.Top;
 
         /// <summary>
-        /// Gets or sets the alignment of the title.
+        /// Alignment around its container.
         /// </summary>
         public Align Align { get; set; } = Align.Center;
 
+        /// <summary>
+        /// Font styling.
+        /// </summary>
         public FontOptions? Font { get; set; }
 
         internal object ToChartObject()
@@ -77,7 +85,7 @@ namespace Beporsoft.Blazor.Charts.Configuration
         /// </summary>
         /// <param name="position"></param>
         /// <param name="align"></param>
-        /// <returns></returns>
+        /// <returns>The same options instance so that multiple calls can be chained</returns>
         public static TitleOptions WithLocation(this TitleOptions options, Position position, Align align)
         {
             options.Position = position;

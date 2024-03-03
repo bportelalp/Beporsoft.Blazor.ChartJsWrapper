@@ -34,16 +34,29 @@ namespace Beporsoft.Blazor.Charts.Datasets
 
         #region Properties
         /// <summary>
-        /// The color applied to the line and the border of points.
+        /// The color applied to the bar border.
         /// </summary>
         public Color? BorderColor { get; set; }
 
         /// <summary>
-        /// The color applied to the fill of points.
+        /// The color applied to the bar fill.
         /// </summary>
         public Color? BackgroundColor { get; set; }
 
+        /// <summary>
+        /// The bar border width in pixels.
+        /// </summary>
         public int? BorderWidth { get; set; }
+
+        /// <summary>
+        /// The bar border radius in pixels.
+        /// </summary>
+        public int? BorderRadius { get; set; }
+
+        /// <summary>
+        /// Skip edges when drawing bar.
+        /// </summary>
+        public BarBorderSkip? SkipBorderEdges { get; set; }
 
         /// <summary>
         /// Percentage, between 0 and 1 of the available width.
@@ -63,6 +76,8 @@ namespace Beporsoft.Blazor.Charts.Datasets
                 obj.borderWidth = BorderWidth.Value;
             if (WidthPercentage is not null)
                 obj.barPercentage = NumberHelpers.AdjustInterval(WidthPercentage.Value, 0, 1);
+            if (SkipBorderEdges is not null)
+                obj.borderSkipped = SkipBorderEdges.Value;
             return obj;
         }
     }

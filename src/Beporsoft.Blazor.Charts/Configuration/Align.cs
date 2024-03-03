@@ -7,6 +7,9 @@ using Beporsoft.Blazor.Charts.Common;
 
 namespace Beporsoft.Blazor.Charts.Configuration
 {
+    /// <summary>
+    /// Specifies the alignment of a text container.
+    /// </summary>
     public class Align : StringEnumClass
     {
         private Align(string value) : base(value) { }
