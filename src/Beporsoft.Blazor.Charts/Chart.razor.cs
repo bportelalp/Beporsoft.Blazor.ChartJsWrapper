@@ -1,11 +1,5 @@
 ﻿using Beporsoft.Blazor.Charts.Common;
-using Beporsoft.Blazor.Charts.Interop;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Beporsoft.Blazor.Charts
 {

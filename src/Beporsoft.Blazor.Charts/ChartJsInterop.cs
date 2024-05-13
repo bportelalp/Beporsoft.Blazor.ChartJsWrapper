@@ -1,14 +1,5 @@
-﻿using Beporsoft.Blazor.Charts.Interop;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Beporsoft.Blazor.Charts
 {
@@ -39,7 +30,7 @@ namespace Beporsoft.Blazor.Charts
             else
                 cfg.data = chart.Data.ToChartObject();
 
-            await module.InvokeVoidAsync(InteropMethods.ActivateChart, chart.ChartId, (object)cfg);
+            await module.InvokeVoidAsync(InteropConstants.Methods.ActivateChart, chart.ChartId, (object)cfg);
 
         }
 
@@ -47,7 +38,7 @@ namespace Beporsoft.Blazor.Charts
         {
             var module = await GetModule();
 
-            await module.InvokeVoidAsync(InteropMethods.DisposeChart, chart.ChartId);
+            await module.InvokeVoidAsync(InteropConstants.Methods.DisposeChart, chart.ChartId);
         }
 
 
@@ -55,21 +46,22 @@ namespace Beporsoft.Blazor.Charts
         {
             if (_module is null)
             {
-                _module = await _js.InvokeAsync<IJSObjectReference>(InteropStrings.Import, InteropStrings.ScriptPath);
+                _module = await _js.InvokeAsync<IJSObjectReference>(InteropConstants.Import, InteropConstants.ScriptPath);
             }
 
             return _module;
         }
 
 
-        private static class InteropStrings
+        private static class InteropConstants
         {
-            public static string Import { get; } = "import";
-            public static string ScriptPath { get; } = "./_content/Beporsoft.Blazor.Charts/js/chartJsInterop.js";
+            public const string Import = "import";
+            public const string ScriptPath = "./_content/Beporsoft.Blazor.Charts/js/chartJsInterop.js";
 
             public static class Methods
             {
-                public static readonly string ActivateChart = "activateChart";
+                public const string ActivateChart = "activateChart";
+                public const string DisposeChart = "disposeChart";
             }
 
         }

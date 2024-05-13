@@ -8,13 +8,13 @@
 		
 		<!--Package metadata-->
 		<Title>Beporsoft.Blazor.Charts</Title>
-		<Description>A Blazor library for display charts</Description>
+		<Description>A Blazor library for display charts based on Chart.Js</Description>
 		<Authors>Bruno Portela</Authors>
-		<PackageProjectUrl></PackageProjectUrl>
-		<RepositoryUrl></RepositoryUrl>
+		<PackageProjectUrl>https://github.com/bportelalp/Beporsoft.Blazor.Charts</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/bportelalp/Beporsoft.Blazor.Charts</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageTags></PackageTags>
+		<PackageTags>chart;chartjs;chart.js;linear;doughnut;bar;scatter;plot;bubble;pie;radial</PackageTags>
 		
 		<!--Versioning-->
 		<VersionPrefix>0.1.0</VersionPrefix>
@@ -23,7 +23,7 @@
 		<FileVersion>$(AssemblyVersion)</FileVersion>
 
 		<!--Package build-->
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
